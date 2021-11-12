@@ -1,38 +1,53 @@
-> pm2 + pushstate-server 将前端项目部署在服务器上
+> 使用 nginx 部署前端项目
 
 > 初始化
-```npm
-# 使用vite创建一个简单的react项目
-npm init @vitejs/app reat-demo -- --template react
+```
+# 安装 nginx
+yum install nginx
 
-# 安装 pm2 和 pushstate-server
-npm i pm2 pushstate-server
+# 查看 nginx 安装位置
+rpm -ql nginx
+
+# /etc/nginx/conf.d/ 对应nginx子配置项存放文件夹
+# /etc/nginx/nginx.conf 主配置文件会默认把这个文件夹中所有子配置项都引入
+
+# 设置开机启动 
+systemctl enable nginx
+
+# 启动 nginx
+systemctl start nginx
 ```
 
-> 在项目根目录新增 server.js (文件名任意)
-```javascript
-// 如下代码，是将项目的dist目录 跑在服务器的 5021 端口
-const server = require('pushstate-server')
-server.start({
-  port: 5021,
-  directory: './dist'
-})
+> centos下操作nginx 相关命令
+
+```
+systemctl start nginx    # 启动 Nginx
+systemctl stop nginx     # 停止 Nginx
+systemctl restart nginx  # 重启 Nginx
+systemctl reload nginx   # 重新加载 Nginx，用于修改配置后
+systemctl enable nginx   # 设置开机启动 Nginx
+systemctl disable nginx  # 关闭开机启动 Nginx
+systemctl status nginx   # 查看 Nginx 运行状态
 ```
 
-> 登录服务器
-```npm
-# 进入到工作目录，存放自己项目文件的目录因人而异
-cd workspace
-
-# 拉取远程代码
-git clone xxx.github.com/xxx
-
-# 安装项目依赖
-npm i
-
-# 构建项目
-npm run build
-
-# 启动server服务
-pm2 start server.js
+> 新增子配置指向demo目录
 ```
+server {
+  listen 8888;
+	server_name demo;
+
+  add_header 'Access-Control-Allow-Origin' $http_origin;   # 全局变量获得当前请求origin，带cookie的请求不支持*
+	add_header 'Access-Control-Allow-Credentials' 'true';    # 为 true 可带上 cookie
+	add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';  # 允许请求方法
+	add_header 'Access-Control-Allow-Headers' $http_access_control_request_headers;  # 允许请求的 header，可以为 *
+	add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';
+
+	location / {
+		root  /workspace/demo/dist;
+		index index.html;
+	}
+}
+```
+
+> 参考
+https://juejin.cn/post/6844904144235413512
