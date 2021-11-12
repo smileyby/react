@@ -1,4 +1,4 @@
-> pm2 + pushstate-server 将前端服务部署在服务器上
+> pm2 + pushstate-server 将前端项目部署在服务器上
 
 > 初始化
 ```npm
