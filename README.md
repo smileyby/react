@@ -8,6 +8,9 @@ yum install nginx
 # 查看 nginx 安装位置
 rpm -ql nginx
 
+# 进入 nginx 配置文件目录
+cd /etc/nginx/nginx.conf
+
 # /etc/nginx/conf.d/ 对应nginx子配置项存放文件夹
 # /etc/nginx/nginx.conf 主配置文件会默认把这个文件夹中所有子配置项都引入
 
