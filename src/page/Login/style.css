@@ -1,0 +1,51 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+}
+.login-bg {
+  background-image: url(https://source.unsplash.com/random);
+  background-repeat: no-repeat;
+  background-color: #fafafa;
+  background-size: cover;
+  background-position: center;
+}
+.login-form-container {
+  flex-grow: 0;
+  max-width: 100%;
+  flex-basis: 100%;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 64px 32px;
+}
+
+@media (min-width: 600px) {
+  .login-bg {
+    flex-basis: 33.333333%;
+    flex-grow: 0;
+    max-width: 33.333333%;
+  }
+  .login-form-container {
+    flex-basis: 66.666667%;
+    flex-grow: 0;
+    max-width: 66.666667%;
+  }
+}
+@media (min-width: 900px) {
+  .login-bg {
+    flex-basis: 58.333333%;
+    flex-grow: 0;
+    max-width: 58.333333%;
+  }
+  .login-form-container {
+    flex-basis: 41.666667%;
+    flex-grow: 0;
+    max-width: 41.666667%;
+  }
+}
