@@ -1,0 +1,18 @@
+.not-fount_content {
+  padding: 32px;
+  max-width: 740px;
+  margin: 0 auto;
+}
+.not-fount_icon {
+  padding-top: 74px;
+  margin-bottom: 14px;
+}
+blockquote {
+  font-size: 15px;
+  color: #858585;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.not-found_link {
+  color: #3eaf7c;
+}

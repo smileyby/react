@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './login.css';
+import './style.css';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -10,6 +10,7 @@ import Checkbox from '@mui/material/Checkbox';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -26,6 +27,10 @@ function Copyright(props) {
 
 function Login(){
   let [type, setType] = useState('login');
+  let navigate = useNavigate();
+  if (localStorage.token) {
+    navigate('/index');
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -36,7 +41,7 @@ function Login(){
     });
     if (type === 'login') {
       localStorage.token = 1;
-      window.location.reload();
+      navigate('/index');
     } else {
       console.log('调用注册')
     }
@@ -45,6 +50,7 @@ function Login(){
   const goRegister = () => {
     setType(type === 'login' ? 'register' : 'login');
   }
+
   return <>
     <main className="login-container">
       <div className="login-bg"></div>
